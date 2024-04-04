@@ -1,0 +1,44 @@
+/*
+ * Dan Dunleavy
+ * BlackJack Deck of cards
+ * 4/24
+ */
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Deck {
+    private ArrayList<String> cards; //Creating Standard Deck
+    
+    public static void main(String[] args) {
+        Deck deck = new Deck(); //Creates A New Deck
+
+        System.out.println("Shuffled deck: "); //For Debugging to Ensure it Shuffles
+        for (String card : deck.cards) {
+            System.out.println(card);
+        }
+    }
+
+    public Deck() {
+        cards = new ArrayList<>();
+        initializeDeck();
+        shuffle();
+    }
+
+    private void initializeDeck() { //Fills Deck w/Cards
+        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+
+        for (String suit : suits) {
+            for (String rank : ranks) {
+                cards.add(rank + " of " + suit);
+            }
+        }
+    }
+
+    public void shuffle() { //Self Explanatory
+        Collections.shuffle(cards);
+    }
+
+}
