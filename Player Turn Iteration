@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class PlayerTurn {
+    private ArrayList<String> players;
+    
+    public static void main(String[] args) { // Debug for how player turns work
+        ArrayList<String> players = new ArrayList<>();
+        players.add("Player 1");
+        players.add("Player 2");
+        players.add("Player 3");
+        players.add("player 4");
+
+        PlayerTurn playerTurn = new PlayerTurn(players);
+        playerTurn.startTurns();
+    }
+
+    x
+    }
+
+    public void startTurns() {
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < players.size(); i++) {
+            String currentPlayer = players.get(i);
+            System.out.println("It's " + currentPlayer + "'s turn.");
+            // Add game logic for player's turn here
+            System.out.println("End of " + currentPlayer + "'s turn.");
+
+            if (i < players.size() - 1) {
+                System.out.println("Press enter to proceed to the next player...");
+                scanner.nextLine(); // Wait for user to press enter
+            }
+        }
+
+        scanner.close();
+    }
+
+}
