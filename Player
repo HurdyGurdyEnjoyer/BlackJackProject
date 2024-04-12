@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+
+class Player extends Person{
+    //Variables
+    double balance = 100; //default value is $100
+    double bettedAmount = 0;
+    int handSize = 0;
+    //better amount saved in game class
+    ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
+    
+    //Constructor
+    public Player(String firstName, String lastName, String playerName, String photo, double balance) {
+        super(firstName, lastName, playerName, photo);
+        this.balance = balance;
+         
+    }
+    
+    //Getters and Setters
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    
+    public double getBettedAmount()
+    {
+    	return bettedAmount;
+    }
+    
+    public void setBettedAmount(double betAmo)
+    {
+    	bettedAmount = betAmo;
+    }
+    
+    public int getHandSize()
+    {
+    	return handSize;
+    }
+    
+    public void setHandSize(int hanSiz)
+    {
+    	handSize = hanSiz;
+    }
+    
+    //ADD IN METHODS AFTER GAME IS MADE
+    public void withdrawBlance(double bal)
+    {
+    	balance -= bal;
+    }
+    
+    public void addBettedAmount(double betAmo)
+    {
+    	bettedAmount = betAmo;
+    }
+    
+    public void addToHand(String rank, String suit)
+    {//addToHand method start
+    	
+    	//creating new card slot
+    	hand.add(new ArrayList<String>());
+    	
+    	//adding card details
+    	hand.get(handSize).add(0, rank);
+    	hand.get(handSize).add(1, suit);
+    	
+    	//updating handSize
+    	handSize = hand.size();
+    	
+    }//addToHand method end
+    
+    public void clearHand()
+    {//clearHand method start
+    	
+    	//clears all cards from the ArrayList
+    	hand.clear();
+    	
+    	handSize = 0;
+    	
+    }//clearHand method end
+}
