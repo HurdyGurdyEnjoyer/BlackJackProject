@@ -1,23 +1,12 @@
-/*
- * Dan Dunleavy
- * BlackJack Deck of cards
- * 4/24
- */
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    private ArrayList<String> cards; //Creating Standard Deck
-    
-    public static void main(String[] args) {
-        Deck deck = new Deck(); //Creates A New Deck
+    private ArrayList<String> cards; // Creating Standard Deck
 
-        System.out.println("Shuffled deck: "); //For Debugging to Ensure it Shuffles
-        for (String card : deck.cards) {
-            System.out.println(card);
-        }
+    public static void main(String[] args) {
+        Deck deck = new Deck(); // Creates A New Deck
+        deck.printDeck();
     }
 
     public Deck() {
@@ -26,7 +15,7 @@ public class Deck {
         shuffle();
     }
 
-    private void initializeDeck() { //Fills Deck w/Cards
+    private void initializeDeck() { // Fills Deck w/Cards
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 
@@ -37,8 +26,27 @@ public class Deck {
         }
     }
 
-    public void shuffle() { //Self Explanatory
+    public void shuffle() { // Self Explanatory
         Collections.shuffle(cards);
     }
-
+    
+    public void printDeck() {
+        System.out.println("Shuffled deck: "); // For Debugging to Ensure it Shuffles
+        for (String card : cards) {
+            int value = getValue(card); // Get the value of the card
+            System.out.println(card + " - Value: " + value); //Debug Make Sure values work
+        }
+    }
+    
+    public static int getValue(String card) {
+        String[] parts = card.split(" ");
+        String rank = parts[0]; // Get the rank of the card
+        if (rank.equals("Ace")) {
+            return 11; // Ace can be 11 or 1, we choose 11 for now
+        } else if (rank.equals("King") || rank.equals("Queen") || rank.equals("Jack")) {
+            return 10; // Face cards have a value of 10
+        } else {
+            return Integer.parseInt(rank); // Number cards have values equal to their ranks
+        }
+    }
 }
