@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+* DealerAK class represents the actions and attributes of the dealer in a Blackjack game.
+* Created on: April 8, 2024
+*/
+class DealerAK {
+	private List<Card> hand;
+	
+	/**
+	 * Initializes the dealer's hand.
+	 */
+	public DealerAK() {
+		hand = new ArrayList<>();
+	}
+	
+	/**
+	 * Adds a card to the dealer's hand.
+	 * @param card The card to be added to the dealer's hand.
+	 */
+	public void addCardToHand(Card card) {
+		hand.add(card);
+	}
+	
+	/**
+	 * Retrieves the list of cards in the dealer's hand.
+	 * @return List of cards in the dealer's hand.
+	 */
+	public List<Card> getHand() {
+		return hand;
+	}
+
+	/**
+	 * Calculates the value of the dealer's hand.
+	 * Takes into account the special case of Aces.
+	 * @return The value of the dealer's hand.
+	 */
+	public int getHandValue() {
+		int value = 0;
+		int aceCount = 0;
+		for (Card card : hand) {
+			int cardValue = card.getValue();
+			if (cardValue == 1) {
+				aceCount++;
+			}
+			value += cardValue;
+		}
+		while (aceCount > 0 && value + 10 <= 21) {
+			value += 10;
+			aceCount--;
+		}
+		return value;
+	}
+	
+	/**
+	 * Determines whether the dealer must hit (draw another card) according to the rules of Blackjack.
+	 * @return True if the dealer must hit, false otherwise.
+	 */
+	public boolean mustHit() {
+		return getHandValue() < 17;
+	}
+}
