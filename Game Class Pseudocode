@@ -1,0 +1,106 @@
+/*
+Int playerValue
+Int dealerValue
+Int bet
+
+Class Game
+
+
+
+CheckBlackjack()	
+PlayerOption()
+DealerOption()
+DetermineResult()		
+
+
+
+
+
+Class CheckBlackjack
+
+Boolean blackjack = cards 2 & value 21
+	Push = player receives bet
+	blackjackWin = bet x 2.5
+	lose = player receives 0 
+	
+	Check Player hand for Blackjack
+		If true
+Check DealerHand for Blackjack
+		If true
+			Push
+		Else 
+			blackjackWin
+Check DealerHand for Blackjack
+		If True 
+			Check PlayerHand for Blackjack 
+			If true
+				Push
+			Else 
+				lose
+
+
+
+
+
+
+
+
+Class PlayerOption
+
+PlayerHand includes Ace value can equal 1 or 11 
+	If hand>21 set value of ace to 1 
+
+	Stay 
+set PlayerValue to cards value
+Hit
+		Gain 1 card
+	Double // only available on first action of hand
+		Bet x 2 
+		Gain 1 card
+		Stay
+	Split
+		Only possible if card1 = card2
+		Create 2 hands 
+		hand1= card1+ hit or double
+			option
+		hand2= card2+ hit or double
+			Option
+	Surrender
+		Player receives .5  x bet
+		Lose
+Return when player stays or playervalue>21
+	
+
+Class DealerOption
+
+ DealerHand includes Ace value can equal 1 or 11 
+	If hand>21 set value of ace to 1
+
+Hit if DealerValue<17
+Hit if DealerValue = Soft17 // DealerValue =17 and includes Ace
+Stay if DealerValue>= 17
+
+
+Class DetermineResult
+
+Lose = player receives 0
+Win = player receives bet x 2 
+Push = player receives bet
+
+
+
+	If PlayerValue >21 
+		lose
+		Write “Bust”
+	Elseif DealerValue >21
+		Win
+		Write “Dealer Bust Player Win!”
+	Elseif DealerValue > PlayerValue
+		Lose
+		Write “Dealer Wins :(“
+	Elseif DealerValue = PlayerValue
+		Push
+		Write “Push” 
+	Elseif win
+		Write “Player Win”
+*/
