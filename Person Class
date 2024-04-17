@@ -1,0 +1,48 @@
+abstract class Person {
+    //Variables
+    private String firstName;
+    private String lastName;
+    private String playerName;
+    private String photo; // May need to change 
+    
+    //Constructor
+    public Person(String firstName, String lastName, String playerName, String photo){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.playerName = playerName;
+        this.photo = photo;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+    
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setphoto(String photo) {
+        this.photo = photo;
+    }
+    
+}
