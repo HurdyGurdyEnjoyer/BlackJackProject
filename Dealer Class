@@ -1,0 +1,17 @@
+//Dealer Class
+
+import java.util.ArrayList;
+
+class Dealer extends Person
+{
+  
+  ArrayList<card> hand = new ArrayList<>(); // NEED TO ADD CARD OBJECT
+  
+  //Constructor
+  public Dealer(String firstName, String lastName, String playerName, String photo) {
+      super(firstName, lastName, playerName, photo);
+      
+  }
+
+}
+
