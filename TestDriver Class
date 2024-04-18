@@ -1,9 +1,17 @@
+import java.util.ArrayList;
+
 public class TestDriver 
 {
 	
 	public static void main(String args[])
 	{
+		ArrayList<Player> listOfPlayers = new ArrayList<>();
 		
+		//running five rounds
+		for(int i = 0; i < 5; ++i)
+		{
+			Game.runGame(listOfPlayers);
+		}
 	}
 	
 }
