@@ -1,0 +1,24 @@
+/*
+ * Gavin Cummings
+ * 04/17/2024
+ * this is a basic test using the text line. This is only for testing. 
+ * If this ends up in the final version I will laugh after I cry. 
+*/
+import java.util.Scanner;
+
+class UI 
+{//UI class start
+	
+	private static Scanner keyIn = new Scanner(System.in);
+	
+	public static double betAmountPrompt()
+	{
+		double betAmo;
+		
+		//prompting for, getting, and parsing user input
+		System.out.print("Please enter your bet.\n>>> ");
+		betAmo = Double.parseDouble(keyIn.nextLine());
+		return betAmo;
+	}
+	
+}//UI class end
