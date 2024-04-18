@@ -4,6 +4,7 @@
  * The purpose of this class is to define the actions a player can take during a turn. This class is meant
  * to be called from a driver class of some kind
  */
+
 import java.util.Scanner;
 
 class PlayerTurn 
@@ -18,8 +19,7 @@ class PlayerTurn
 	 * Stay (do nothing and end turn)
 	 * (maybe) split
 	 */
-
-  
+	
 	public void placeBet(double betAmount)
 	{//placeBet method start
 		
@@ -28,15 +28,19 @@ class PlayerTurn
 		
 	}//placeBet method end
 	
-	public void playerHit(/*int playerID*/)
+	public static void playerHit(Player curPla)
 	{//playerHit method start
 	
 		//get a card from the dealer, add that card to the player's hand and add that card's points to the player's point total
 
-		String cardRank, cardSuit;
-		//draw card from dealer
+		String[] card = new String[2];
+		//draw card from dealer. retrieving string from deck, splitting string into two then clearing whitespace to get just the rank and suit
+		card = Deck.drawFromDeck().split("for", 2);
+		card[0].trim();//trimming rank
+		card[1].trim();//trimming suit
 		
-		listOfPlayers.get(playerID).addToHand(cardRank, cardSuit);
+		//adding card to hand
+		curPla.addToHand(card[0], card[1]);
 		
 	}//playerHit method end
 	
