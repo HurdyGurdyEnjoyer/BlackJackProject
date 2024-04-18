@@ -1,17 +1,31 @@
 import java.util.ArrayList;
 
 public class TestDriver 
-{
+{//TestDriver class start
+	
+	static ArrayList<Player> listOfPlayers;
 	
 	public static void main(String args[])
-	{
-		ArrayList<Player> listOfPlayers = new ArrayList<>();
+	{//main method start
+		listOfPlayers = new ArrayList<>();
+		
+		createPlayer("John", "Wick", "Cool Guy");
+		createPlayer("John", "Wick", "Cool Guy");
 		
 		//running five rounds
 		for(int i = 0; i < 5; ++i)
 		{
 			Game.runGame(listOfPlayers);
 		}
-	}
+	}//main method end
 	
-}
+	public static void createPlayer(String name, String lName, String nName)
+	{//createPlayers method start
+		
+		Player newPlay = new Player(name, lName, nName, "no", 100.00);
+		
+		listOfPlayers.add(newPlay);
+		
+	}//createPlayers method end
+	
+}//TestDriver class end
