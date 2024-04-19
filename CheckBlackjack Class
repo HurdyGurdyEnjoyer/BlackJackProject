@@ -1,0 +1,60 @@
+*/
+*  Brendan Malone 4/18/24 
+*  This class gets the player and dealers initally dealt cards and checks for blackjack
+*  It will be implemented right after the cards are dealt to player and delear 
+*/
+public class CheckBlackjack {
+    // Define constants for outcomes
+    final double BLACKJACK_WIN_MULTIPLIER = 2.5;
+    final double PUSH = 1.0; // Assuming the bet is returned in a push
+    final double LOSS = 0;
+    // Check if a hand has a blackjack (total value of 21 with just two cards)
+    Boolean hasBlackjack(String[][] hand) {
+        // Implement logic to check if the hand has a blackjack
+        // For example, if the sum of the hand is 21 and it consists of just 2 cards
+        // This implementation depends on your representation of cards and their values
+        return (sumOfHand(hand) == 21 && hand.length == 2);
+    }
+
+    // Calculate the sum of a hand
+    int sumOfHand(String[][] hand) {
+        // Implement logic to calculate the sum of the hand
+        // Sum up the values of the cards in the hand
+        int sum = 0;
+        for (String[] card : hand) {
+        	// The first element of each card represents its rank
+            String rank = card[0];
+            //Converts rank to card value
+            int value = getCardValue(rank);
+            sum += value;
+        }
+        return sum;
+    }
+
+ // Determine the outcome based on player's and dealer's hands
+    double determineOutcome(String[][] playerHand, String[][] dealerHand, double bet) {
+        if (hasBlackjack(playerHand)) {
+            if (hasBlackjack(dealerHand)) {
+                return PUSH * bet; // Push
+            } else {
+                return BLACKJACK_WIN_MULTIPLIER * bet; // Blackjack win
+            }
+        } else {
+            if (hasBlackjack(dealerHand)) {
+                return LOSS * bet; // Player loses (returning 0)
+            }
+            return 0;
+        }
+    }
+ // Method to get the value of a card based on its rank
+    int getCardValue(String rank) {
+    	if (rank.equals("A")) { // If the card is an Ace
+			return 11; // Ace has a value of 1
+		} else if (rank.equals("K") || rank.equals("Q") || rank.equals("J")) { // If the card is a face card (Jack, Queen, or King)
+			return 10; // Face cards have a value of 10
+		} else { // Otherwise, it's a number card
+			return Integer.parseInt(rank); // Return the face value of the card
+		}
+        
+    }
+}
