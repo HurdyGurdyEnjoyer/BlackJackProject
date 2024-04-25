@@ -1,3 +1,6 @@
+//Class that creates cards with value, and suite
+
+
 public class Card
 {
 
