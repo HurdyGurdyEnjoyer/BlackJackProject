@@ -1,3 +1,6 @@
+//Creates Hand by calling different methods
+
+
 public interface hand
 {
 	// Method to calculate the total value of the hand
