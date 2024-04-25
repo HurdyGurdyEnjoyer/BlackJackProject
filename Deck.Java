@@ -1,3 +1,7 @@
+//Deck Class Creates cards in deck and sees if card is in deck or not
+
+
+
 import java.util.Random;
 
 public class Deck {
