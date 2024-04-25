@@ -1,3 +1,6 @@
+//Game class that calls other classes into an easy to understand class
+
+
 public interface Game {
     //method to start the game
     void startGame();
