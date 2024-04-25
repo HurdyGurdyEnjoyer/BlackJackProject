@@ -1,4 +1,4 @@
-//Game class that calls other classes into an easy to understand class
+//Game class that calls other methods into an easy to understand class
 
 
 public interface Game {
