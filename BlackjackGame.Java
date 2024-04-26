@@ -109,28 +109,45 @@ public class BlackjackGame implements cardGame {
 	
 	// This code takes the user commands to hit or stand
 	public void getUserMove() {
-		String command;
-		char c;
-		for (int i = 0; i < userBJ; i++) {
-			if ( regularplayer[i].getBet() > 0 ) {
-				System.out.println();
-				System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
+	    String command;
+	    char c;
+	    for (int i = 0; i < userBJ; i++) {
+	        if (regularplayer[i].getBet() > 0) {
+	            System.out.println();
+	            System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
 
-				do {
-					do {
-						System.out.print(regularplayer[i].getName() + " (H)it or (S)tand? ");
-						command = input.next();
-						c = command.toUpperCase().charAt(0);
-					} while ( ! ( c == 'H' || c == 'S' ) );
-					if ( c == 'H' ) {
-						regularplayer[i].addCard(deckBJ.nextCard());
-						System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
-					}
-				} while (c != 'S' && regularplayer[i].getTotal() <= 21 );
-			}
-		}
+	            do {
+	                System.out.print(regularplayer[i].getName() + " (H)it or (S)tand or (D)ouble or (P)surrender? ");
+	                command = input.next();
+	                c = command.toUpperCase().charAt(0);
+
+	                if (c == 'H') {
+	                    regularplayer[i].addCard(deckBJ.nextCard());
+	                    System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
+	                } else if (c == 'D') {
+	                    if (regularplayer[i].getHandSize() == 2) {
+	                        regularplayer[i].addCard(deckBJ.nextCard());
+	                        regularplayer[i].adjustBalance(-regularplayer[i].getBet()); // Subtract the original bet
+	                        regularplayer[i].setBet(regularplayer[i].getBet() * 2); // Double the bet amount
+	                        System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
+	                        break;
+	                    } else {
+	                        System.out.println("You can only double down with exactly two cards");
+	                    }
+	                } else if (c == 'P') {
+	                    System.out.println(regularplayer[i].getName() + " has surrendered. Half of the original bet will be returned.");
+	                    regularplayer[i].adjustBalance(regularplayer[i].getBet() / 2); // Return half of the original bet
+	                    regularplayer[i].setBet(0); // Reset bet to zero after surrender
+	                    break; // Exit loop after surrendering
+	                } else if (c == 'S') {
+	                    break; // Exit loop if user chooses to stand
+	                } else {
+	                    System.out.println("Invalid input. Please try again.");
+	                }
+	            } while (regularplayer[i].getTotal() <= 21);
+	        }
+	    }
 	}
-	
 	// Code for the dealer to play
 	public void dealerMove() {
 		boolean isSomePlayerStillInTheGame = false;
@@ -159,7 +176,7 @@ public class BlackjackGame implements cardGame {
 				} else if ( regularplayer[i].getTotal() < dealerBJ.Total() && dealerBJ.Total() <= 21 ) {
 					System.out.println(regularplayer[i].getName() + " has lost");
 					regularplayer[i].loss();
-				} else if (regularplayer[i].getTotal() == 21) {
+				} else if (regularplayer[i].getTotal() == 21 || regularplayer[i].getHandSize() == 2) {
 					System.out.println(regularplayer[i].getName() + " has won with blackjack!");
 					regularplayer[i].blackjackBet();
 				} else {
