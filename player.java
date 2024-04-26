@@ -8,6 +8,7 @@ public class player {
     // Constructor function
     public player() {
         money = 100;
+        bet = 0;
         hand = new blackJackHand();
     }
 
@@ -28,6 +29,19 @@ public class player {
         bet = 0;
     }
 
+    //Double Bet Win
+    public void dubble() {
+    	money += bet*2;
+    	bet = 0;
+    		
+    }
+    
+    //Surrender bet
+    public void surrender() {
+    	money -= bet/2;
+    	bet = 0;
+    }
+    
     // Remove money if they lose
     public void loss() {
         money -= bet;
