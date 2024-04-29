@@ -7,7 +7,7 @@ public class player {
 
     // Constructor function
     public player() {
-        money = 100;
+    	resetMoney();
         hand = new blackJackHand();
     }
 
@@ -63,6 +63,12 @@ public class player {
     // Sets a player's name
     public void setName(String name1){
         playerName = name1;
+    }
+    
+    // sets a player's total amount of money to 100
+    public void resetMoney()
+    {
+    	money = 100;
     }
 
     // Gets a player's name
