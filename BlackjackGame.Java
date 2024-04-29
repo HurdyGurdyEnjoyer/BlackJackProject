@@ -37,7 +37,7 @@ public class BlackjackGame implements cardGame {
 
 		// Asks for player names and assigns them
 		for (int i = 0; i < userBJ; i++) {
-			System.out.print("Please enter the name of player: " + (i + 1));
+			System.out.print("Please enter the name of player#" + (i + 1) + ": ");
 			names = input.next();
 			regularplayer[i] = new player();
 			regularplayer[i].setName(names);
@@ -192,8 +192,24 @@ public class BlackjackGame implements cardGame {
 			}
 			if(regularplayer[i].getMoney() == 0)
 			{
-			System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getMoney() + " and is out of the game.");
-			regularplayer[i].removeFromGame();
+				System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getMoney() + " and is out of the game.");
+				
+				do //loop through until the user inputs the right character. 
+				{
+					//prompting if loosing player would like to buy back in and continue or leave. 
+					System.out.print(regularplayer[i].getName() + ", would you like to buy back? ($100 re-entry) (Y)es or (N)o: ");
+					if (input.next().toUpperCase().trim().charAt(0) == 'Y')
+					{
+						regularplayer[i].resetMoney();
+						System.out.println(regularplayer[i].getName() + " is back in the game.");
+						break;
+					}
+					else if (input.next().toUpperCase().trim().charAt(0) == 'N')
+					{
+						regularplayer[i].removeFromGame();
+						break;
+					}
+				} while(true);
 			}
 		}
 	}
