@@ -86,4 +86,41 @@ public class blackJackHand implements hand {
         int value = playHand[1].getValue();
         return value == 1 || value >= 10;
     }
+    
+ // Method to get a card at a specific index from the hand
+    public Card getCard(int index) {
+        if (index >= 0 && index < totalCards) {
+            return playHand[index];
+        } else {
+            return null; // Return null if the index is out of bounds
+        }
+    }
+  
+
+    // Method to remove a card from the hand at a given index
+    public Card removeCard(int index) {
+        if (index < 0 || index >= totalCards) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        Card removedCard = playHand[index];
+        // Shift cards to the left to fill the gap left by the removed card
+        for (int i = index; i < totalCards - 1; i++) {
+            playHand[i] = playHand[i + 1];
+        }
+        playHand[--totalCards] = null; // Set the last element to null
+        return removedCard;
+    }
+
+
+ // Method to split the hand if conditions are met
+    public Card split() {
+        if (totalCards == 2 && playHand[0].getValue() == playHand[1].getValue()) {
+            Card splitCard = playHand[1]; // Remove the second card and return it for splitting
+            playHand[1] = null; // Set the second card slot to null to remove the card
+            totalCards--; // Decrement the total number of cards in the hand
+            return splitCard;
+        } else {
+            return null; // Split not possible
+        }
+    }
 }
