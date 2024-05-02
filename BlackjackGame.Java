@@ -1,9 +1,3 @@
-//Class with multiple functions to run a game of blackjack
-
-
-
-
-
 import java.util.Scanner;
 
 public class BlackjackGame implements cardGame {
@@ -13,6 +7,11 @@ public class BlackjackGame implements cardGame {
 	private player[] regularplayer;
 	private Deck deckBJ;
 	private Dealer dealerBJ = new Dealer();
+	private boolean isSplitted = false;
+	public boolean isSplittable(int playerIndex) {
+		blackJackHand playerHand = regularplayer[playerIndex].getHands().get(0);
+		return playerHand.getTotalCards() == 2 && playerHand.getCard(0).getValue() == playerHand.getCard(1).getValue() && !isSplitted;
+	}
 	
 	// Starts game and displays the rules
 	public void startGame(){
@@ -37,7 +36,7 @@ public class BlackjackGame implements cardGame {
 
 		// Asks for player names and assigns them
 		for (int i = 0; i < userBJ; i++) {
-			System.out.print("Please enter the name of player: " + (i + 1));
+			System.out.print("Please enter the name of player#" + (i + 1) + ": ");
 			names = input.next();
 			regularplayer[i] = new player();
 			regularplayer[i].setName(names);
@@ -117,11 +116,24 @@ public class BlackjackGame implements cardGame {
 	            System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
 
 	            do {
-	                System.out.print(regularplayer[i].getName() + " (H)it or (S)tand or (D)ouble or (P)surrender? ");
+	                System.out.print(regularplayer[i].getName() + " (H)it or (S)tand or (D)ouble or (T)split or (P)surrender? ");
 	                command = input.next();
 	                c = command.toUpperCase().charAt(0);
 
-	                if (c == 'H') {
+	                if (c == 'T') {
+	                    if (isSplittable(i)) {
+	                        blackJackHand splitHand = regularplayer[i].split();
+	                        if (splitHand != null) {
+	                            regularplayer[i].addHand(splitHand);
+	                            System.out.println(regularplayer[i].getName() + " split and now has" + regularplayer[i].getHandString());
+	                            isSplitted = true;
+	                        } else {
+	                            System.out.println("Split not possible");
+	                        }
+	                    } else {
+	                        System.out.println("Split not possible");
+	                    }
+	                } else if (c == 'H') {
 	                    regularplayer[i].addCard(deckBJ.nextCard());
 	                    System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getHandString());
 	                } else if (c == 'D') {
@@ -148,6 +160,10 @@ public class BlackjackGame implements cardGame {
 	        }
 	    }
 	}
+	
+
+	
+	 
 	// Code for the dealer to play
 	public void dealerMove() {
 		boolean isSomePlayerStillInTheGame = false;
@@ -176,7 +192,7 @@ public class BlackjackGame implements cardGame {
 				} else if ( regularplayer[i].getTotal() < dealerBJ.Total() && dealerBJ.Total() <= 21 ) {
 					System.out.println(regularplayer[i].getName() + " has lost");
 					regularplayer[i].loss();
-				} else if (regularplayer[i].getTotal() == 21 || regularplayer[i].getHandSize() == 2) {
+				} else if (regularplayer[i].getTotal() == 21) {
 					System.out.println(regularplayer[i].getName() + " has won with blackjack!");
 					regularplayer[i].blackjackBet();
 				} else {
@@ -209,8 +225,24 @@ public class BlackjackGame implements cardGame {
 			}
 			if(regularplayer[i].getMoney() == 0)
 			{
-			System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getMoney() + " and is out of the game.");
-			regularplayer[i].removeFromGame();
+				System.out.println(regularplayer[i].getName() + " has " + regularplayer[i].getMoney() + " and is out of the game.");
+				
+				do //loop through until the user inputs the right character. 
+				{
+					//prompting if loosing player would like to buy back in and continue or leave. 
+					System.out.print(regularplayer[i].getName() + ", would you like to buy back? ($100 re-entry) (Y)es or (N)o: ");
+					if (input.next().toUpperCase().trim().charAt(0) == 'Y')
+					{
+						regularplayer[i].resetMoney();
+						System.out.println(regularplayer[i].getName() + " is back in the game.");
+						break;
+					}
+					else if (input.next().toUpperCase().trim().charAt(0) == 'N')
+					{
+						regularplayer[i].removeFromGame();
+						break;
+					}
+				} while(true);
 			}
 		}
 	}
@@ -305,6 +337,5 @@ public class BlackjackGame implements cardGame {
 			System.out.println("");
 			System.out.println("Thank you for playing!");
 		}
-
-
-} //End class
+		
+}		
