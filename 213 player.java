@@ -1,5 +1,5 @@
 /**
- * Creates a player with firstname lastname and deposit amount
+ * Creates a player with firstname lastname, deposit amount, and an empty hand.
  */
 
 /**
@@ -86,6 +86,38 @@ public class player {
 	{
 		hand.clear();
 	}
+	
+	//returns the face value of every card in hand
+	public int getHandValue()
+	{//getHandValue method start
+		
+		int totalVal = 0;
+		
+		//getting the face value of every card in hand
+		for(singleCard curCard : hand)
+		{
+			totalVal = curCard.getNumericValue();
+		}
+		return totalVal;
+	}//getHandValue method end
+	
+	//returns maximum possible point value in hand
+	public int getMaxValue()
+	{//getMaxValue method start
+		int maxVal = 0;
+		
+		for(singleCard curCard : hand)
+		{
+			//if the curCard is an ace, set it's value to 10
+			if(curCard.getFaceValue() == 1)
+			{
+				maxVal += 11;
+			}
+			else
+				maxVal = curCard.getNumericValue();
+		}
+		return maxVal;
+	}//getMaxValue method end
 	
 	@Override
 	public String toString() {
