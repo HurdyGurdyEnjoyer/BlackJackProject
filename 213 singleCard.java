@@ -19,6 +19,12 @@ public class singleCard {
 		super();
 		this.suite = suite;
 		this.faceValue = faceValue;
+		
+		//if the card is a face card, set its numerical value equal to 10
+		if(faceValue > 10)
+			this.numericValue = 10;
+		else
+			this.numericValue = faceValue;
 	}
 
 	/**
