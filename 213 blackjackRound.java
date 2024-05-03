@@ -37,7 +37,22 @@ public class blackjackRound {
 	
 	// double  - minor
 	// stand
+	
 	// hit
+	public void PT_Hit(player curPlayer)
+	{//PT_Hit method start
+		
+		//creating a card
+		Card newCard = cardsforRound.nextCard();
+		
+		//create an instance of singleCard
+		singleCard newHit = new singleCard(newCard.getSuiteDesignator(), newCard.getValue());
+		
+		//add the single card to a hand. either on the table or on the player. 
+		curPlayer.addToHand(newHit);
+		
+	}//PT_Hit method end
+	
 	// split  - minor
 	// surround  - minor
 	
