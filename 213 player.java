@@ -87,6 +87,20 @@ public class player {
 		hand.clear();
 	}
 	
+	//returns the total number of aces currently in hand
+	public int numOfAces()
+	{
+		int amoAces = 0;
+		
+		for(singleCard curCard : hand)
+		{
+			if (curCard.getFaceValue() == 1)
+				amoAces++;
+		}
+		
+		return amoAces;
+	}
+	
 	//returns the face value of every card in hand
 	public int getHandValue()
 	{//getHandValue method start
