@@ -9,7 +9,7 @@
 public class singleCard {
     private char suite;
     private int faceValue;
-    private int numbericValue;
+    private int numericValue;
     
 	/**
 	 * @param suite
@@ -50,17 +50,17 @@ public class singleCard {
 	}
 
 	/**
-	 * @return the numbericValue
+	 * @return the numericValue
 	 */
-	public int getNumbericValue() {
-		return numbericValue;
+	public int getNumericValue() {
+		return numericValue;
 	}
 
 	/**
-	 * @param numbericValue the numbericValue to set
+	 * @param numericValue the numericValue to set
 	 */
-	public void setNumbericValue(int numbericValue) {
-		this.numbericValue = numbericValue;
+	public void setNumericValue(int numericValue) {
+		this.numericValue = numericValue;
 	}
     
 	
